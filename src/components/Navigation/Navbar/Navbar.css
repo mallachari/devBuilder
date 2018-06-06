@@ -1,0 +1,28 @@
+.Navbar {
+   margin: 0;
+   padding: 0;
+   width: 100%;
+   height: 60px;
+   background: rgb(46, 52, 58);
+   border-bottom: 1px solid #000;
+}
+
+.Navbar__Content {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   height: 100%;
+}
+
+@media (min-width: 1000px) {
+   .Navbar__Content {
+      width: 1000px;
+      margin: auto;
+   }
+}
+
+@media (max-width: 499px) {
+   .DesktopOnly {
+      display: none;
+   }
+}

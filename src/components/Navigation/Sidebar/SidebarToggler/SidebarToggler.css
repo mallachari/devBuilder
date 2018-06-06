@@ -1,0 +1,23 @@
+.SidebarToggler {
+   height: 100%;
+   width: 60px;
+   cursor: pointer;
+   display: flex;
+   flex-flow: column;
+   justify-content: space-around;
+   align-items: center;
+   padding: 5px 0;
+}
+
+.SidebarToggler div {
+   width: 80%;
+   height: 6px;
+   background: #DDD;
+   border-radius: 20px;
+}
+
+@media (min-width: 500px) {
+   .SidebarToggler {
+      display: none;
+   }
+}

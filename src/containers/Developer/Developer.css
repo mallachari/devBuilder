@@ -1,0 +1,56 @@
+.Developer {
+   color: #DDD;
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr;
+   grid-template-rows: repeat(7, 65px);
+   height: 500px;
+   max-width: 950px;
+   margin: 30px auto;
+   align-items: stretch;
+   justify-items: stretch;
+}
+
+.Developer h2 {
+   font-family: inherit;
+}
+
+.Icon {
+   display: block;
+   grid-column-start: 2;
+   grid-column-end: span 1;
+   grid-row-start: 5;
+   grid-row-end: span 3;
+   align-self: center;
+   justify-self: center;
+   cursor: pointer;
+   transition: all 1s;
+
+   position: relative;
+}
+
+.Icon:hover {
+   transform: scale(1.1, 1.1);
+   color: #AAA;
+}
+
+.Icon i {
+   font-size: 150px;
+}
+
+.NoSkills {
+   text-align: center;
+   font-family: inherit;
+}
+
+@media(min-width: 500px) {
+   .Icon {
+      grid-column-start: 2;
+      grid-column-end: span 1;
+      grid-row-start: 1;
+      grid-row-end: span 6;
+   }
+
+   .Icon i {
+      font-size: 300px;
+   }
+}

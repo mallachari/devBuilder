@@ -1,0 +1,21 @@
+.Brand {
+   display: flex;
+   flex-flow: row;
+   height: 100%;
+   width: 100%;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.Brand__Title {
+   color: #DDD;
+   font-weight: bold;
+   font-size: 30px;
+   margin: 0 10px;
+}
+
+@media (min-width: 500px) {
+   .Brand {
+      width: auto;
+   }
+}

@@ -1,0 +1,54 @@
+.SkillPanel {
+   padding: 0 10px;
+}
+
+header {
+   display: flex;
+   justify-content: space-between;
+}
+
+h1 {
+   margin: 0;
+}
+
+.SkillImportance {
+   width: 100%;
+   margin-top: 10px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.Description {
+   cursor: pointer;
+   transition: color 0.5s;
+}
+
+.Description:hover {
+   color: #AAA;
+}
+
+.DescriptionEdit {
+   text-align: center;
+}
+
+.DescriptionEdit > textarea {
+   background-color: #555; 
+   border: 1px solid #333;
+   border-radius: 5px;
+   outline: none;
+   color: inherit;
+   font-family: inherit;
+   width: 100%;
+}
+
+.Buttons {
+   display: flex;
+   justify-content: center;
+}
+
+@media(min-width: 500px) {
+   .SkillPanel {
+      width: 500px;
+   }
+}

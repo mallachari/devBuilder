@@ -1,0 +1,14 @@
+.SkillList {
+   display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
+   margin-bottom: 10px;
+}
+
+@media(min-width: 500px) {
+   .SkillList {
+      flex-flow: column;
+      padding-top: 5px;
+      padding-right: 10px;
+   }
+}

@@ -1,0 +1,48 @@
+.Tooltip {
+   visibility: hidden;
+   width: 160px;
+   background-color:#AAA;
+   color: rgb(46, 52, 58);
+   text-align: center;
+   padding: 5px 0;
+   border-radius: 6px;
+
+   position: absolute;
+   z-index: 1;
+
+   /* bottom: 100%; */
+   left: 50%;
+   margin-left: -80px;
+}
+
+.Top {
+   bottom: 100%;
+}
+
+.Bottom {
+   top: 100%;
+}
+
+.Tooltip::after {
+   content: "";
+   position: absolute;
+   margin-left: -5px;
+   border-width: 5px;
+   border-style: solid;
+}
+
+.Top::after {
+   top: 100%;
+   left: 50%;
+   border-color: #AAA transparent transparent transparent;
+}
+
+.Bottom::after {
+   bottom: 100%;
+   left: 50%;
+   border-color: transparent transparent #AAA transparent;
+}
+
+.Active {
+   visibility: visible;
+}
