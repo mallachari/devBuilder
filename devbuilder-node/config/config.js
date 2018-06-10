@@ -6,4 +6,6 @@ if (env === 'development') {
 } else if (env === 'test') {
   process.env.PORT = 3000;
   process.env.MONGODB_URI = 'mongodb://localhost:27017/devbuilderTest';
+} else if (env === 'prod') {
+   process.env.MONGODB_URI = 'mongodb://burrito:!QAZxsw2@ds235388.mlab.com:35388/devbuilder';
 }
