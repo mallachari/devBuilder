@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "watch": "nodemon --exec npm start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "SET NODE_ENV=test&&mocha tests/**/*.test.js",
+    "test-watch": "nodemon --exec \"npm test\""
   },
   "author": "Jakub Jankowski",
   "license": "ISC",
@@ -14,9 +15,13 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "express-graphql": "^0.6.12",
+    "graphql": "^0.13.2",
+    "helmet": "^3.12.1",
     "jsonwebtoken": "^8.2.2",
     "mongodb": "^3.0.10",
-    "mongoose": "^5.1.4"
+    "mongoose": "^5.1.4",
+    "mongoose-hidden": "^1.5.3"
   },
   "devDependencies": {
     "expect": "^23.1.0",

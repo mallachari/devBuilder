@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
+const errorCodes = require('../errors/errorCodes').mongoCodes;
 
 // router.post('/', (req, res, next) => {
 //    res.status(200).json({
@@ -15,7 +16,7 @@ router.post('/signup', (req, res, next) => {
    const user = new User({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      password: bcrypt.hashSync(req.body.password, 10),
+      password: req.body.password,
       email: req.body.email
    });
 
@@ -26,7 +27,7 @@ router.post('/signup', (req, res, next) => {
       .catch(err => {
          res.status(500).json({
             message: 'An error occured',
-            error: err
+            error: errorCodes[err.code] || err
          });
       });
 });
@@ -36,17 +37,17 @@ router.post('/signin', (req, res, next) => {
       .then(user => {
          if(!user) {
             return res.status(401).json({
-               title: 'Login failed',
-               error: {message: 'Invalid login credentials'}
+               message: 'Login failed',
+               error: 'Invalid login credentials'
             }); 
          }
          if(!bcrypt.compareSync(req.body.password, user.password)) {
             return res.status(401).json({
-               title: 'Login failed',
-               error: {message: 'Invalid login credentials'}
+               message: 'Login failed',
+               error: 'Invalid login credentials'
             }); 
          }
-         const token = jwt.sign({ user }, 'secret', { expiresIn: 7200 });
+         const token = jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: 7200 });
          res.status(200).json({
             message: 'Succesfully logged in',
             token: token,

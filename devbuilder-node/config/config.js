@@ -1,11 +1,8 @@
-var env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'development';
 
-if (env === 'development') {
-  process.env.PORT = 3000;
-  process.env.MONGODB_URI = 'mongodb://localhost:27017/devbuilder';
-} else if (env === 'test') {
-  process.env.PORT = 3000;
-  process.env.MONGODB_URI = 'mongodb://localhost:27017/devbuilderTest';
-} else if (env === 'production') {
-   process.env.MONGODB_URI = 'mongodb://burrito:!QAZxsw2@ds235388.mlab.com:35388/devbuilder';
-}
+const config = require('./config.json');
+const envConfig = config[env];
+
+Object.keys(envConfig).forEach(key => {
+  process.env[key] = envConfig[key];
+});
