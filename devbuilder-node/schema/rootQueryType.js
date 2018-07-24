@@ -21,6 +21,12 @@ const RootQuery = new GraphQLObjectType({
       resolve() {
         return SkillType.find({});
       }
+    },
+    orders: {
+      type: new GraphQLList(OrderType),
+      resolve() {
+        return Order.find({})
+      }
     }
   }
 });

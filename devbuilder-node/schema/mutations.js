@@ -4,7 +4,8 @@ const {
   GraphQLInputObjectType, 
   GraphQLString,
   GraphQLList,
-  GraphQLInt
+  GraphQLInt,
+  GraphQLNonNull
 } = graphql;
 const jwt = require('jsonwebtoken');
 
@@ -29,8 +30,8 @@ const mutation = new GraphQLObjectType({
     addSkillType: {
       type: SkillTypesType,
       args: {
-        name: { type: GraphQLString },
-        fullName: { type: GraphQLString }
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        fullName: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve(parentValue, { name, fullName }) {
         return (new SkillType({ name, fullName })).save();
@@ -39,7 +40,7 @@ const mutation = new GraphQLObjectType({
     deleteSkillType: {
       type: SkillTypesType,
       args: {
-        name: { type: GraphQLString }
+        name: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve(parentValue, { name }) {
         return SkillType.findOneAndRemove( { name });
@@ -48,8 +49,8 @@ const mutation = new GraphQLObjectType({
     addOrder: {
       type: OrderType,
       args: {
-        token: { type: GraphQLString },
-        skills: { type: new GraphQLList(SkillInputType) }
+        token: { type: new GraphQLNonNull(GraphQLString) },
+        skills: { type: new GraphQLNonNull(new GraphQLList(SkillInputType)) }
       },
       resolve(parentValue, { token, skills }) {
         try {
@@ -63,8 +64,8 @@ const mutation = new GraphQLObjectType({
     deleteOrder: {
       type: OrderType,
       args: {
-        token: { type: GraphQLString },
-        id: { type: GraphQLString }
+        token: { type: new GraphQLNonNull(GraphQLString) },
+        id: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve(parentValue, { token, id }) {
         try {
