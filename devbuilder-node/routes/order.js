@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const OrderService = require('../services/orderService');
+
 const authenticate = require('../middleware/authenticate');
 const Order = require('../models/order');
 const SkillType = require('../models/skillType');
@@ -15,10 +17,7 @@ router.get('/', authenticate, (req, res) => {
       error: 'No user found'
    });
   }
-  Order.find({})
-    //.populate('skills')
-    .populate({ path: 'skills', populate: { path: 'type' }})
-    .populate('user', 'firstName lastName email')
+  OrderService.getOrders()
     .then(orders => {
       res.json(orders);
     })
@@ -37,30 +36,7 @@ router.post('/', authenticate, (req, res) => {
     return res.status(400).json(new Error('Bad request', 'Skills required'));
   }
 
-  const order = new Order({
-    user,
-    skills: []
-  });
-
-  const skillTypeQueries = [];
-  const skillQueries = [];
-  for(let skill of skills) {
-    skillTypeQueries.push(SkillType.findByName(skill.type));
-  }
-  Promise.all(skillTypeQueries)
-    .then(skillTypes => {
-      for(let i=0; i< skills.length; i++) {
-        skills[i].type = skillTypes[i];
-        skills[i].order = order._id;
-        const skill = new Skill(skills[i]);
-        order.skills.push(skill);
-        skillQueries.push(skill.save());
-      }
-      return Promise.all(skillQueries)
-    })
-    .then(skills => {
-      return order.save();
-    })
+  OrderService.addOrder(user, skills)
     .then(order => {
       return res.status(201).json(order);
     })
@@ -74,7 +50,7 @@ router.post('/', authenticate, (req, res) => {
 router.delete('/:id', authenticate, (req, res) => {
   const user = req.user;
   const id = req.params.id;
-  Order.removeOrder(id)
+  OrderService.deleteOrder(id)
     .then(() => {
       res.status(204).send();
     })
