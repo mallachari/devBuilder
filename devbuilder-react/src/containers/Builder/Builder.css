@@ -4,6 +4,12 @@
    justify-content: flex-start;
 }
 
+.NoSkills {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
 @media(min-width: 500px) {
    .Controller {
       display: flex;

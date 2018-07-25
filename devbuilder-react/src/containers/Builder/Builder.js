@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import classes from './Builder.css';
 import SkillList from '../../components/Builder/SkillList/SkillList';
 import SkillPanel from '../../components/Builder/SkillPanel/SkillPanel';
+import Button from '../../components/UI/Button/Button';
 import * as builderActions from '../../store/actions/devBuilder';
 
 class Builder extends Component {
@@ -75,36 +76,44 @@ class Builder extends Component {
    }
 
    render() {
-      return (
-         <div className={classes.Controller}>
-            <SkillList 
-               skills={this.props.skillsList}
-               changeSkill={this.changeSkillhandler} />
-            <SkillPanel
-               exists={this.props.skills && this.props.skills[this.props.current]} 
-               current={{
-                  name: this.props.current,
-                  description: this.state.description,
-                  value: this.state.value
-               }}
-               fullName={this.props.skillsList ? this.props.skillsList[this.props.current].fullName : 'loading'}
-               handleSliderChange={this.handleSliderChange}
-               editMode={this.state.editMode}
-               editModeChange={this.changeEditModeHandler}
-               handleChangeDescription={this.changeDescriptionHandler}
-               skillAdded={this.props.onSkillAdded}
-               skillRemoved={this.props.onSkillRemoved} />
-         </div>
-         
-      );
+      if(!this.props.skillsList || Object.keys(this.props.skillsList).length === 0) {
+            return (
+              <div className={classes.NoSkills}>
+                <p>No skills list available.</p>
+                <Button type="Highlight" size="30">Initialize</Button>
+              </div>
+            )
+      } else {
+        return (
+          <div className={classes.Controller}>
+              <SkillList 
+                skills={this.props.skillsList}
+                changeSkill={this.changeSkillhandler} />
+              <SkillPanel
+                exists={this.props.skills && this.props.skills[this.props.current]} 
+                current={{
+                    name: this.props.current,
+                    description: this.state.description,
+                    value: this.state.value
+                }}
+                fullName={this.props.skillsList ? this.props.skillsList[this.props.current].fullName : 'loading'}
+                handleSliderChange={this.handleSliderChange}
+                editMode={this.state.editMode}
+                editModeChange={this.changeEditModeHandler}
+                handleChangeDescription={this.changeDescriptionHandler}
+                skillAdded={this.props.onSkillAdded}
+                skillRemoved={this.props.onSkillRemoved} />
+          </div>
+        );
+      }
    }
 }
 
 const mapStateToProps = state => {
    return {
-      skills: state.skills,
-      skillsList: state.skillsList,
-      current: state.current
+      skills: state.devBuilder.skills,
+      skillsList: state.devBuilder.skillsList,
+      current: state.devBuilder.current
    }
 }
 

@@ -9,7 +9,7 @@ const navbar = (props) => (
       <div className={classes.Navbar__Content}>
             <Brand togglerClicked={props.togglerClicked}/>
             <div className={classes.DesktopOnly}>
-               <NavItems/>
+               <NavItems isAuthenticated={props.isAuthenticated}/>
             </div>
       </div>
    </div>

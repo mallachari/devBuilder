@@ -25,6 +25,11 @@ const reducer = (state = initialState, action) => {
                ...skills
             }
          }
+      case actionTypes.RESET_SKILLS:
+         return {
+           ...state,
+           skills: null
+         }
       case actionTypes.SET_SKILLS:
          return {
             ...state,

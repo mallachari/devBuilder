@@ -1,0 +1,32 @@
+.Order {
+  width: 100%;
+  margin: 20px 10px;
+  padding: 10px;
+  border-left: 1px solid #AAA;
+}
+
+.Skills {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  justify-items: stretch;
+  align-items: stretch;
+}
+
+.Skill {
+  width: 200px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+@media(min-width: 500px) {
+  .Order {
+    width: 500px;
+  }
+}
+
+@media(min-width: 1000px) {
+  .Order {
+    width: 900px;
+  }
+}

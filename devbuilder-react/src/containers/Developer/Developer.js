@@ -1,15 +1,58 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import classes from './Developer.css';
+import Builder from '../Builder/Builder';
 import Skill from '../../components/Developer/Skill/Skill';
 import Tooltip from '../../components/UI/Tooltip/Tooltip';
 import * as builderActions from '../../store/actions/devBuilder';
+import * as orderActions from '../../store/actions/order';
+import { setTimeout } from 'timers';
 
 class Developer extends Component {
    state = {
-      tooltip: false
+      tooltip: false,
+      tooltipText: 'Click me to make an order'
    }
+
+  componentWillReceiveProps(nextProps) {
+    if(!nextProps.token) {
+      this.setState({
+        tooltipText: 'You should login first to make an order'
+      })
+    } else if(!nextProps.skills) {
+      this.setState({
+        tooltipText: 'You should add some skills before ordering'
+      })
+    } else {
+      this.setState({
+        tooltipText: 'Click me to make an order'
+      })
+    }
+
+    //if order was just received
+    if(nextProps.purchased && !this.props.purchased) {
+      this.setState({
+        tooltip: true,
+        tooltipText: 'Order sent'
+      })
+    }
+
+  }
+
+  componentDidUpdate() {
+    if(this.props.purchased) {
+      setTimeout(() => {
+        this.props.resetSkills();
+        this.props.initOrder();
+      }, 1500);
+    }
+  }
+
+  // componentDidMount() {
+  //   this.props.initOrder();
+  // }
 
    showTooltipHandler = () => {
       this.setState({tooltip: true});
@@ -17,6 +60,29 @@ class Developer extends Component {
    
    hideTooltipHandler = () => {
       this.setState({tooltip: false});
+   }
+
+   orderHandler = () => {
+     console.log(this.props.skills);
+     console.log(this.props.token);
+
+     if(!this.props.skills || !this.props.token) {
+       return;
+     }
+
+     const order = {
+       skills: []
+     }
+     
+     for(let key in this.props.skills) {
+       order.skills.push({
+        type: key,
+        description: this.props.skills[key].description,
+        value: this.props.skills[key].value
+       });
+     }
+
+     this.props.addOrder(order, this.props.token);
    }
 
    render() {
@@ -57,33 +123,42 @@ class Developer extends Component {
       }
 
       return (
+        <Fragment>    
          <div className={classes.Developer}>
             {elements}
             <div 
                className={classes.Icon} 
                onMouseEnter={this.showTooltipHandler}
                onMouseLeave={this.hideTooltipHandler}
+               onClick={this.orderHandler}
                >
                <Tooltip type="Top" show={this.state.tooltip}>
-                  I do nothing yet, but I will save your order in future
+                  {this.state.tooltipText}
                </Tooltip>
                <i className="fab fa-android"></i>
             </div>
          </div>
+         <Builder/>
+        </Fragment>
       )
    }
 }
 
 const mapStateToProps = state => {
    return {
-      skills: state.skills,
-      skillsList: state.skillsList
+      skills: state.devBuilder.skills,
+      skillsList: state.devBuilder.skillsList,
+      token: state.auth.token,
+      purchased: state.order.purchased
    }
 };
 
 const mapDispatchToProps = dispatch => {
    return {
-      setCurrentSkill: (name) => dispatch(builderActions.setCurrentSkill(name))
+      setCurrentSkill: (name) => dispatch(builderActions.setCurrentSkill(name)),
+      resetSkills: () => dispatch(builderActions.resetSkills()),
+      initOrder: () => dispatch(orderActions.orderInit()),
+      addOrder: (order, token) => dispatch(orderActions.addOrder(order, token))
    }
 };
 

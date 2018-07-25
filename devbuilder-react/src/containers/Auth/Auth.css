@@ -1,0 +1,27 @@
+.Auth {
+  display: flex;
+  flex-flow: column;
+  height: 500px;
+  justify-content: center;
+  align-items: center;
+}
+
+.Form {
+  width: 250px;
+}
+
+.Submit {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  margin-left: -20px;
+}
+
+.SwitchMethod {
+  cursor: pointer;
+  transition: color 0.5s;
+}
+
+.SwitchMethod:hover {
+  color: #AAA;
+}

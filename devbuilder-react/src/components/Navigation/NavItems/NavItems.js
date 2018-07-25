@@ -6,49 +6,48 @@ import Tooltip from '../../UI/Tooltip/Tooltip';
 
 class NavItems extends Component {
 
-   state = {
-      show: {
-         about: false,
-         sign: false
+  state = {
+    show: {
+      about: false,
+      sign: false
+    }
+  }
+
+  toggleShowHandler = (type) => {
+    this.setState(prevState => {
+      return {
+        show: {
+          ...prevState.show,
+          [type]: !prevState.show[type]
+        }
       }
-   }
+    });
+  }
 
-   toggleShowHandler = (type) => {
-      this.setState(prevState => {
-         return {
-            show: {
-               ...prevState.show,
-               [type]: !prevState.show[type]
-            }
-         }
-      });
-   }
+  render() {
 
-   render() {
-      return (
-         <ul className={classes.NavItems}>
-            <NavItem>Build</NavItem>
-            <NavItem 
-               hoverIn={()=>this.toggleShowHandler('about')}
-               hoverOut={()=>this.toggleShowHandler('about')}>
-               About
-               <Tooltip 
-                  type="Bottom" 
-                  show={this.state.show.about}
-                  fontSize="15"
-                  size="80">Not yet</Tooltip>
-            </NavItem>
-            <NavItem
-               hoverIn={()=>this.toggleShowHandler('sign')}
-               hoverOut={()=>this.toggleShowHandler('sign')}>Sign In
-               <Tooltip 
-                  type="Bottom" 
-                  show={this.state.show.sign}
-                  fontSize="15"
-                  size="80">Not yet</Tooltip>
-            </NavItem>
-         </ul>
-      );
-   }
+    return (
+      <ul className={classes.NavItems}>
+        <NavItem to="/" exact>Build</NavItem>
+        <NavItem
+          to="/about"
+          hoverIn={()=>this.toggleShowHandler('about')}
+          hoverOut={()=>this.toggleShowHandler('about')}>
+          About
+          <Tooltip 
+            type="Bottom" 
+            show={this.state.show.about}
+            fontSize="15"
+            size="80">Not yet</Tooltip>
+        </NavItem>
+        {this.props.isAuthenticated ? <NavItem to="/orders">Orders</NavItem> : null}
+        {!this.props.isAuthenticated 
+          ? <NavItem to="/auth">Auth</NavItem>
+          : <NavItem to="/logout">Logout</NavItem>
+        }
+        
+      </ul>
+    );
+  }
 }
 export default NavItems;
