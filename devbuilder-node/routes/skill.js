@@ -5,6 +5,7 @@ const Skill = require('./../models/skill');
 const SkillType = require('./../models/skillType');
 const Order = require('./../models/order');
 const authenticate = require('../middleware/authenticate');
+const { reset } = require('../services/skillTypeService');
 
 router.get('/', (req, res) => {
   SkillType.find({}).then(skills => {
@@ -61,6 +62,15 @@ router.delete('/:name', (req, res) => {
       });
     });
 
+});
+
+//resets skills list
+router.put('/', (req,res) => {
+  reset();
+  SkillType.find({})
+    .then(skills => {
+      return res.status(201).json(skills);
+    })
 })
 
 module.exports = router;

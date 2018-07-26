@@ -49,6 +49,8 @@ const mutation = new GraphQLObjectType({
     addOrder: {
       type: OrderType,
       args: {
+        title: { type: GraphQLString },
+        description: { type: GraphQLString },
         token: { type: new GraphQLNonNull(GraphQLString) },
         skills: { type: new GraphQLNonNull(new GraphQLList(SkillInputType)) }
       },

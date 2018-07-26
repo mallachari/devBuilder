@@ -8,8 +8,10 @@ const getOrders = () => {
     .populate('user', 'firstName lastName email')
 }
 
-const addOrder = (user, skills) => {
+const addOrder = (user, skills, title, description) => {
   const order = new Order({
+    title,
+    description,
     user,
     skills: []
   });

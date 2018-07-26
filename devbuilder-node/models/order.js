@@ -6,6 +6,8 @@ const User = require('./user');
 
 const Order = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  title: { type: String },
+  description: { type: String },
   skills: [{
     type: Schema.Types.ObjectId,
     ref: 'Skill'

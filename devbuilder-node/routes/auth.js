@@ -6,6 +6,8 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const errorCodes = require('../errors/errorCodes').mongoCodes;
 
+const EXPIRATION_TIME = 7200;
+
 // router.post('/', (req, res, next) => {
 //    res.status(200).json({
 //       message: 'ok'
@@ -47,11 +49,12 @@ router.post('/signin', (req, res, next) => {
                error: 'Invalid login credentials'
             }); 
          }
-         const token = jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: 7200 });
+         const token = jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: EXPIRATION_TIME });
          res.status(200).json({
             message: 'Succesfully logged in',
             token: token,
-            userId: user._id
+            userId: user._id,
+            expiresIn: EXPIRATION_TIME
          });
 
       })

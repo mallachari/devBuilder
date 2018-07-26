@@ -14,6 +14,8 @@ const skillRoutes = require('./routes/skill');
 const orderRoutes = require('./routes/order');
 const schema = require('./schema/schema');
 
+const { initialize } = require('./services/skillTypeService');
+
 const app = express();
 const port = process.env.PORT;
 
@@ -52,5 +54,7 @@ app.use((req, res, next) => {
 
 const server = http.createServer(app);
 server.listen(port);
+
+initialize();
 
 module.exports = app;

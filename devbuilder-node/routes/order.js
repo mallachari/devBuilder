@@ -35,8 +35,10 @@ router.post('/', authenticate, (req, res) => {
   if(!skills) {
     return res.status(400).json(new Error('Bad request', 'Skills required'));
   }
+  const title = req.body.title;
+  const description = req.body.description;
 
-  OrderService.addOrder(user, skills)
+  OrderService.addOrder(user, skills, title, description)
     .then(order => {
       return res.status(201).json(order);
     })
