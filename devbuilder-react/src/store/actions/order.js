@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios from 'axios';
+import axios from '../../axios-backend';
 
 export const orderInit = () => {
   return {
@@ -30,7 +30,7 @@ const orderFail = (error) => {
 export const addOrder = (order, token) => {
   return dispatch => {
     dispatch( orderStart() );
-    axios.post(`http://localhost:3000/order?token=${token}`, order)
+    axios.post(`/order?token=${token}`, order)
       .then(response => {
         dispatch( orderSuccess(response.data) );
       })
@@ -63,7 +63,7 @@ const fetchOrdersFail = (error) => {
 export const fetchOrders = (token) => {
   return dispatch => {
     dispatch( fetchOrdersStart() );
-    axios.get(`http://localhost:3000/order?token=${token}`)
+    axios.get(`/order?token=${token}`)
       .then(response => {
         dispatch( fetchOrdersSuccess(response.data) );
       })
@@ -96,7 +96,7 @@ const deleteOrderFail = (error) => {
 export const deleteOrder = (id, token) => {
   return dispatch => {
     dispatch( deleteOrderStart() );
-    axios.delete(`http://localhost:3000/order/${id}?token=${token}`)
+    axios.delete(`/order/${id}?token=${token}`)
       .then(response => {
         dispatch( deleteOrderSuccess(id) );
       })

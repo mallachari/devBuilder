@@ -8,6 +8,7 @@ import Developer from './containers/Developer/Developer';
 import Auth from './containers/Auth/Auth';
 import Logout from './containers/Auth/Logout/Logout';
 import Orders from './containers/Orders/Orders';
+import About from './components/About/About';
 
 import * as actions from './store/actions/auth';
 
@@ -22,6 +23,7 @@ class App extends Component {
     let routes = (
       <Switch>
         <Route path="/auth" component={Auth}/>
+        <Route path="/about" component={About}/>
         <Route path="/" exact component={Developer}/>
         <Redirect to="/" />
       </Switch>
@@ -31,6 +33,7 @@ class App extends Component {
       routes = (
         <Switch>
           <Route path="/auth" component={Auth}/>
+          <Route path="/about" component={About}/>
           <Route path="/logout" component={Logout}/>
           <Route path="/orders" component={Orders}/>
           <Route path="/" exact component={Developer}/>

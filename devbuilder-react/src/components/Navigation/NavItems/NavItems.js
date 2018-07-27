@@ -29,10 +29,9 @@ class NavItems extends Component {
     return (
       <ul className={classes.NavItems}>
         <NavItem to="/" exact>Build</NavItem>
+        {this.props.isAuthenticated ? <NavItem to="/orders">Orders</NavItem> : null}
         <NavItem
-          to="/about"
-          hoverIn={()=>this.toggleShowHandler('about')}
-          hoverOut={()=>this.toggleShowHandler('about')}>
+          to="/about">
           About
           <Tooltip 
             type="Bottom" 
@@ -40,7 +39,6 @@ class NavItems extends Component {
             fontSize="15"
             size="80">Not yet</Tooltip>
         </NavItem>
-        {this.props.isAuthenticated ? <NavItem to="/orders">Orders</NavItem> : null}
         {!this.props.isAuthenticated 
           ? <NavItem to="/auth">Auth</NavItem>
           : <NavItem to="/logout">Logout</NavItem>

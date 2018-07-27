@@ -13,7 +13,7 @@ const sidebar = (props) => {
       <Fragment>
          <Backdrop show={props.isOpen}  clicked={props.closed}/>
          <div className={attachedClasses.join(' ')} onClick={props.closed}>
-            <NavItems />
+            <NavItems isAuthenticated={props.isAuthenticated} />
          </div>
       </Fragment>
    );

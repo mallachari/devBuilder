@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 
 import classes from './Developer.css';
 import Builder from '../Builder/Builder';
@@ -9,11 +8,14 @@ import Tooltip from '../../components/UI/Tooltip/Tooltip';
 import * as builderActions from '../../store/actions/devBuilder';
 import * as orderActions from '../../store/actions/order';
 import { setTimeout } from 'timers';
+import Modal from '../../components/UI/Modal/Modal';
+import Checkout from '../../components/Developer/Checkout/Checkout';
 
 class Developer extends Component {
    state = {
       tooltip: false,
-      tooltipText: 'Click me to make an order'
+      tooltipText: 'Click me to make an order',
+      checkout: false
    }
 
   componentWillReceiveProps(nextProps) {
@@ -62,15 +64,22 @@ class Developer extends Component {
       this.setState({tooltip: false});
    }
 
-   orderHandler = () => {
-     console.log(this.props.skills);
-     console.log(this.props.token);
+   modalClosed = () => {
+     this.setState({checkout: false});
+   }
 
-     if(!this.props.skills || !this.props.token) {
-       return;
-     }
+   checkoutHandler = () => {
+    if(!this.props.skills || !this.props.token) {
+      return;
+    }
 
+     this.setState({checkout: true});
+   }
+
+   orderHandler = (title, description) => {
      const order = {
+       title,
+       description,
        skills: []
      }
      
@@ -83,6 +92,8 @@ class Developer extends Component {
      }
 
      this.props.addOrder(order, this.props.token);
+
+     this.setState({checkout: false});
    }
 
    render() {
@@ -130,7 +141,7 @@ class Developer extends Component {
                className={classes.Icon} 
                onMouseEnter={this.showTooltipHandler}
                onMouseLeave={this.hideTooltipHandler}
-               onClick={this.orderHandler}
+               onClick={this.checkoutHandler}
                >
                <Tooltip type="Top" show={this.state.tooltip}>
                   {this.state.tooltipText}
@@ -138,6 +149,11 @@ class Developer extends Component {
                <i className="fab fa-android"></i>
             </div>
          </div>
+         <Modal
+            show={this.state.checkout}
+            modalClosed={this.modalClosed}>
+            <Checkout onSend={this.orderHandler}/>
+          </Modal>
          <Builder/>
         </Fragment>
       )

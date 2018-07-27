@@ -17,8 +17,8 @@ class Orders extends Component {
         {this.props.orders.map(order => (
           <Order
             key={order._id}
-            name="Order"
-            description="Order description"
+            name={order.title || 'No title'}
+            description={order.description || 'No description'}
             skills={order.skills}
             remove={() => this.props.deleteOrder(order._id, this.props.token)} />
         ))}

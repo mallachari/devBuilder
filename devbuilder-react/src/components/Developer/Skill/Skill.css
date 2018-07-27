@@ -12,8 +12,15 @@
 .ProgressBar {
 }
 
+.Small {
+  font-size: 20px;
+}
+
 @media(min-width: 650px) {
    .Skill {
       font-size: 30px;
    }
+   .Small {
+    font-size: 20px;
+  }
 }

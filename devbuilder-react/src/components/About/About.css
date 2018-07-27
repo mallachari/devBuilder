@@ -1,0 +1,17 @@
+.About {
+  display: flex;
+  justify-content: center;
+}
+
+.Content {
+  margin: 50px;
+  padding: 20px;
+  text-align: center;
+  border-bottom: solid 1px #ccc;
+}
+
+@media(min-width: 1000px) {
+  .Content {
+    max-width: 1000px;
+  }
+}

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../../axios-backend';
 
 import * as actionTypes from './actionTypes';
 // import {
@@ -39,7 +39,7 @@ const setSkills = (skills) => {
 /** Fetches data from backend */
 export const initSkills = () => {
   return dispatch => {
-    axios.get('http://localhost:3000/skill')
+    axios.get('/skill')
       .then(response => {
         const skillsList = response.data.reduce((obj, skill) => {
           obj[skill.name] = {

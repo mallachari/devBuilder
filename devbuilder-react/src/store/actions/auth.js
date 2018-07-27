@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../../axios-backend';
 
 import * as actionTypes from './actionTypes';
 
@@ -54,7 +54,7 @@ export const login = (email, password) => {
       email,
       password
     }
-    const url = 'http://localhost:3000/auth/signin';
+    const url = '/auth/signin';
     axios.post(url, authData)
       .then(response => {
         const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
@@ -79,7 +79,7 @@ export const signup = (firstName, lastName, email, password) => {
       email,
       password,
     }
-    const url = 'http://localhost:3000/auth/signup';
+    const url = '/auth/signup';
     axios.post(url, authData)
       .then(response => {
         dispatch(authSignupSuccess(response.data._id));

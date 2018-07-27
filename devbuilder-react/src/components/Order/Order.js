@@ -48,7 +48,8 @@ class Order extends Component {
                   current: skill
                 })}
                 skill={skill.type.fullName}
-                value={10*skill.value} />
+                value={10*skill.value}
+                type="Small" />
               <Tooltip 
                 type="Top" 
                 show={
@@ -65,7 +66,7 @@ class Order extends Component {
         <div className={classes.Buttons}>
           <Button 
               type='Highlight' 
-              size='30'
+              size='24'
               clicked={this.props.remove}>Remove</Button>
         </div>
       </div>

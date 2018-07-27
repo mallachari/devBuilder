@@ -11,10 +11,11 @@
   flex-wrap: wrap;
   justify-items: stretch;
   align-items: stretch;
+  margin-top: 15px;
 }
 
 .Skill {
-  width: 200px;
+  width: 150px;
   margin-bottom: 20px;
   position: relative;
 }
