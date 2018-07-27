@@ -4,9 +4,6 @@ const router = express.Router();
 const OrderService = require('../services/orderService');
 
 const authenticate = require('../middleware/authenticate');
-const Order = require('../models/order');
-const SkillType = require('../models/skillType');
-const Skill = require('../models/skill');
 const Error = require('../errors/errorMessage');
 
 router.get('/', authenticate, (req, res) => {
@@ -17,7 +14,7 @@ router.get('/', authenticate, (req, res) => {
       error: 'No user found'
    });
   }
-  OrderService.getOrders()
+  OrderService.getOrdersForUser(user)
     .then(orders => {
       res.json(orders);
     })

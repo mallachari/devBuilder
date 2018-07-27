@@ -8,6 +8,12 @@ const getOrders = () => {
     .populate('user', 'firstName lastName email')
 }
 
+const getOrdersForUser= (user) => {
+  return Order.find({user: user})
+    .populate({ path: 'skills', populate: { path: 'type' }})
+    .populate('user', 'firstName lastName email')
+}
+
 const addOrder = (user, skills, title, description) => {
   const order = new Order({
     title,
@@ -43,6 +49,7 @@ const deleteOrder = (id) => {
 
 module.exports = {
   getOrders,
+  getOrdersForUser,
   addOrder,
   deleteOrder
 }
