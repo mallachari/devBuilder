@@ -1,6 +1,6 @@
 # devBuilder
 
-**The purpose of the app is to provide a simple interface for companies to request their need of development skills from author.**
+**The purpose of the app is to provide a simple interface for companies to request their need of development skills.**
 
 This app is built with React/Redux. It communicates with backend responsible for data storage, authorization and orders management.
 
