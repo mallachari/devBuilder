@@ -10,7 +10,7 @@
     "JWT_SECRET": "9ji3cm9zb592mek1aqpej"
   },
   "production": {
-    "MONGODB_URI": "mongodb://burrito:!QAZxsw2@ds235388.mlab.com:35388/devbuilder",
-    "JWT_SECRET": "prjvnvlemwpwmc93hv94n"
+    "MONGODB_URI": "",
+    "JWT_SECRET": ""
   }
 }
