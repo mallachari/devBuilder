@@ -1,0 +1,16 @@
+{
+  "test": {
+    "PORT": 3000,
+    "MONGODB_URI": "mongodb://test_uri",
+    "JWT_SECRET": "test_secret"
+  },
+  "development": {
+    "PORT": 3000,
+    "MONGODB_URI": "mongodb://dev_uri",
+    "JWT_SECRET": "dev_secret"
+  },
+  "production": {
+    "MONGODB_URI": "mongodb://prod_uri",
+    "JWT_SECRET": "prod_secret"
+  }
+}
